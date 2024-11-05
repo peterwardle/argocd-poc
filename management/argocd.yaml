@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-onboarding-argocd
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+        values:
+          type: '{{index .metadata.annotations "cluster.bedegaming.com/type"}}'
+  template:      
+    metadata:
+      name: '{{name}}-argocd'
+    spec:
+      project: default
+
+      source:
+        chart: argocd
+        repoURL: https://argoproj.github.io/argo-helm
+        helm:
+          releaseName: argocd
+      
+      destination:
+        server: "{{server}}"
+        namespace: argocd
+
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
