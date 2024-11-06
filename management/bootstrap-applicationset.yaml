@@ -19,7 +19,7 @@ spec:
           type: '{{index .metadata.annotations "cluster.bedegaming.com/type"}}'
   template:      
     metadata:
-      name: '{{.name}}-platform'
+      name: '{{name}}-platform'
     spec:
       project: default
 
@@ -29,7 +29,7 @@ spec:
         path: "./clusters/{{.values.type}}"
       
       destination:
-        server: '{{.server}}'
+        server: '{{server}}'
         namespace: argocd
 
       syncPolicy:
