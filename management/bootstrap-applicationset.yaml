@@ -26,7 +26,7 @@ spec:
       source:
         repoURL: https://github.dev/peterwardle/argocd-poc.git
         targetRevision: HEAD
-        path: "./clusters/{{.values.type}}"
+        path: "./clusters/{{values.type}}"
       
       destination:
         server: '{{server}}'
