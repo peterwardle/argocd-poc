@@ -19,17 +19,17 @@ spec:
           type: '{{index .metadata.annotations "cluster.bedegaming.com/type"}}'
   template:      
     metadata:
-      name: '{{name}}-platform'
+      name: '{{.name}}-platform'
     spec:
       project: default
 
       source:
         repoURL: https://github.dev/peterwardle/argocd-poc.git
         targetRevision: HEAD
-        path: "./clusters/{{type}}"
+        path: "./clusters/{{.values.type}}"
       
       destination:
-        server: '{{server}}'
+        server: '{{.server}}'
         namespace: argocd
 
       syncPolicy:
