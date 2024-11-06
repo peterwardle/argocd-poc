@@ -17,10 +17,6 @@ spec:
     repoURL: https://github.com/peterwardle/argocd-poc.git
     targetRevision: HEAD
     path: ./sample/platform
-   
-    # directory
-    directory:
-      recurse: false
   
   # Destination cluster and namespace to deploy the application
   destination:
