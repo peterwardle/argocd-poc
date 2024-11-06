@@ -5,6 +5,8 @@ metadata:
   name: cluster-bootstrapping
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: [missingkey=error]
   generators:
     - clusters:
         selector:
@@ -16,20 +18,20 @@ spec:
               values:
                 - platform
         values:
-          type: '{{index .metadata.annotations "cluster.bedegaming.com/type"}}'
+          type: '{{ index .metadata.labels "cluster.bedegaming.com/type" }}'
   template:      
     metadata:
-      name: '{{name}}-platform'
+      name: '{{.name}}-platform'
     spec:
       project: default
 
       source:
-        repoURL: https://github.dev/peterwardle/argocd-poc.git
+        repoURL: https://github.com/peterwardle/argocd-poc.git
         targetRevision: HEAD
-        path: "./clusters/{{values.type}}"
+        path: "./clusters/{{.values.type}}"
       
       destination:
-        server: '{{server}}'
+        server: '{{.server}}'
         namespace: argocd
 
       syncPolicy:

@@ -14,7 +14,7 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: https://github.dev/peterwardle/argocd-poc.git
+    repoURL: https://github.com/peterwardle/argocd-poc.git
     targetRevision: HEAD
     path: ./sample/platform
    
